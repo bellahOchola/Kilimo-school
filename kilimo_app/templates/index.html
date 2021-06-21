@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="dashboard.html">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!-- Dark Logo icon -->
+                            <!-- <img src="{% static 'plugins/images/logo-icon.png' %}" alt="homepage" /> -->
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+                            <!-- <img src="{% static 'plugins/images/logo-text.png' %}" alt="homepage" /> -->
+                        </span>
+                    </a>
+                    
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                   
+                   
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+
+                       
+                        <li class=" in">
+                            
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li>
+                            <a style="text-decoration:none" class="profile-pic" href="#">
+                                <img src="{% static 'plugins/images/users/varun.jpg' %}" alt="user-img" width="36"
+                                    class="img-circle"><span class="text-white font-medium">ADMIN</span></a>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item pt-2">
+                            <a style="text-decoration:none" class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'index' %}"
+                                aria-expanded="false">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                                <a style="text-decoration:none" class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'students' %}"
+                                    aria-expanded="false">
+                                    <i class="fa fa-table" aria-hidden="true"></i>
+                                    <span class="hide-menu">New students</span>
+                                </a>
+                            </li>
+                        <li class="sidebar-item">
+                            <a style="text-decoration:none" class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+                                aria-expanded="false">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu">All students</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+       
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="col-md-1"></div> -->
+                    <div class="col-md-12 col-lg-12 col-sm-12" style='margin-top: 2%; margin-left:1%'>
+                            
+                            <!-- Button trigger modal -->
+                            <button style='margin-bottom:2%; border: none; font-size:12px; ' type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-info"><span class="fa fa-plus "></span> Add class stream</button>
+                            <!-- Button trigger modal -->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add a class stream</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <form method='POST' enctype="multi-part" novalidate>
+                                                    {% csrf_token %}
+                                                   
+                                                    <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Class title:</label>
+                                                            <div class="col-sm-9">
+                                                              {{form.class_title}}
+                                                            </div>
+                                                          </div>
+                                                          <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Students Number:</label>
+                                                                <div class="col-sm-9">
+                                                                    {{form.students_number}}
+                                                                </div>
+                                                                </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Class Teacher:</label>
+                                                            <div class="col-sm-9">
+                                                                {{form.teacher}}
+                                                            </div>
+                                                            </div>
+                                                    
+                                                        
+                                                    <button style='margin-left:50%; margin-top:3%;' type="submit" class="btn btn-outline-info">Submit</button>
+                                                    <button style='margin-top:3%;' type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                                            </form>
+
+                                            
+                                                    
+                                    </div>
+                                    
+                                   
+                                    </div>
+                                    </div>
+                                </div>
+                            <!-- Modal -->
+                            <div class="white-box">
+                                    <h5 style="margin-top:1%;font-weight:bold; margin-bottom: 3% "> All Class Streams</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class='col-md-3'>
+                                        {% for classes in all_class %}
+                                        <div class="card" style="width: 10rem;">
+                                            <div class="card-body">
+                                             <a href="{% url 'single_class' classes.id %}"><h5 class="card-title">{{classes.class_title}}</h5></a>
+                                              
+                                            </div>
+                                          </div>
+                                          {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- <div class="col-md-1"></div> -->
+                        </div>
+                    </div>
+            </div>
+
+</div>
+
+
+
+
+<style>
+
+    th{
+        font-weight:bold !important;
+        font-size: 15px !important;
+        color:black !important;
+    }
+
+    td{
+        font-size: 15px !important;
+        color:black !important;
+        border-bottom: 1px solid whitesmoke !important;
+    }
+
+    hr{
+        color: green !important;
+        height: 2px !important;
+        margin-top:-2% !important;
+        margin-bottom: 3%;
+    }
+</style>
+{% endblock %}
+
+

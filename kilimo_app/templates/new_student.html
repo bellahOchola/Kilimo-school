@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="dashboard.html">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!-- Dark Logo icon -->
+                            <!-- <img src="{% static 'plugins/images/logo-icon.png' %}" alt="homepage" /> -->
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+                            <!-- <img src="{% static 'plugins/images/logo-text.png' %}" alt="homepage" /> -->
+                        </span>
+                    </a>
+                    
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                   
+                   
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+
+                       
+                        <li class=" in">
+                            
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li>
+                            <a style="text-decoration:none" class="profile-pic" href="#">
+                                <img src="{% static 'plugins/images/users/varun.jpg' %}" alt="user-img" width="36"
+                                    class="img-circle"><span class="text-white font-medium">ADMIN</span></a>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item pt-2">
+                            <a style="text-decoration:none" class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'index' %}"
+                                aria-expanded="false">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a style="text-decoration:none" class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+                                aria-expanded="false">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu">All students</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+       
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="col-md-1"></div> -->
+                    <div class="col-md-12 col-lg-12 col-sm-12" style='margin-top: 2%; margin-left:1%'>
+                            
+
+                            <div class="card" style="width: 50rem;">
+                                    <div class="card-body">
+                                        <h3 style='margin-bottom: 20px;'>ADD NEW STUDENT</h3>
+                                            <form method='POST' enctype="multi-part" novalidate>
+                                                    {% csrf_token %}
+                                                   
+                                                    <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Student Name:</label>
+                                                            <div class="col-sm-9">
+                                                              {{form.name}}
+                                                            </div>
+                                                          </div>
+                                                          <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Admission Number:</label>
+                                                                <div class="col-sm-9">
+                                                                    {{form.admission}}
+                                                                </div>
+                                                                </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Class:</label>
+                                                            <div class="col-sm-9">
+                                                            <select name="students_class" style='width: 260px !important; height:35px;'>
+                                                                {%for my_class in all_classes%}
+                                                                <option value="{{my_class.class_title}}" >{{my_class.class_title}}</option>
+                                                                {%endfor%}
+                                                            </select>
+                                                            </div>
+                                                            </div>
+                                                    
+                                                        
+                                                    <button style='margin-left:30%; margin-top:3%;' type="submit" class="btn btn-outline-info">Save</button>
+                                                    <button style='margin-top:3%;' type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                                            </form>
+
+                                    </div>
+                            </div>    
+                                                    
+                                    </div>
+                                    
+                                   
+                                    </div>
+                                    </div>
+
+                                    <div class="white-box">
+                                            <h5 style="margin-top:1%;font-weight:bold; margin-bottom: 3% "> All Students</h5>
+                                            <hr>
+                                            <div class="table-responsive">
+                                            <table id='table_id' class="table no-wrap" style="margin-top:4%">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">Student name</th>
+                                                        <th scope="col">Admission</th>
+                                                        <th scope="col">Class</th>
+                                                        
+                                                      </tr>
+                                                    </thead>
+                                                    {% for students in all_students %}
+                                                    <tr>
+                                                        <td>{{students.name}}</td>
+                                                        
+                                                        <td>{{students.admission}}</td>
+                                                        
+                                                        <td>{{students.student_class}}</td>
+                                                        <!-- <td><button style='' type="submit" class="btn btn-sm btn-round btn-info">Active</button></td> -->
+                                                        
+                                                      </tr>
+                                                    
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                   
+                                        </div>
+                                </div>
+                            <!-- Modal -->
+                      
+                            </div>
+                            <!-- <div class="col-md-1"></div> -->
+                        </div>
+                    </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+<style>
+
+    th{
+        font-weight:bold !important;
+        font-size: 15px !important;
+        color:black !important;
+    }
+
+    td{
+        font-size: 15px !important;
+        color:black !important;
+        border-bottom: 1px solid whitesmoke !important;
+    }
+
+    hr{
+        color: green !important;
+        height: 2px !important;
+        margin-top:-2% !important;
+        margin-bottom: 3%;
+    }
+</style>
+{% endblock %}
+
+
